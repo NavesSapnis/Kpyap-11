@@ -21,6 +21,7 @@ namespace Kpyap_11
         {//
             Catalog catalog = new Catalog();
             Catalog[] arr = new Catalog[5];
+            
             while (true)
             {
                 try
