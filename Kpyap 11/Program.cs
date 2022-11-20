@@ -20,13 +20,14 @@ namespace Kpyap_11
         static void Main(string[] args)
         {
             Catalog catalog = new Catalog();
-
-            Catalogs catalogs = new Catalogs();
+            Catalog test1 = new Catalog("1", DateTime.Now, 423);
+            Catalog test2 = new Catalog("2", DateTime.Now, 12);
+            Catalog[] arr = new Catalog[5];
             while (true)
             {
-                //try
-                //{
-                    switch (Menu("1 - Создать объект\n2 - клонировать объект\n3 - Создать массив объктов\n4 - вывести массив\n5 - Отсортировать по названию файла\n6 - Отсортировать по выбранному полю\n7 говно переделвый"))
+                try
+                {
+                    switch (Menu("1 - Создать объект\n2 - клонировать объект\n3 - Создать массив объктов\n4 - вывести массив\n5 - Отсортировать"))
                     {
                         case 1:
                             Console.Clear();
@@ -62,42 +63,41 @@ namespace Kpyap_11
                             break;
                         case 3:
                             Console.Clear();
-                            catalogs = (Catalogs)catalogs.CreateArray();
+                            arr = catalog.RandomCatalogs();
                             break;
                         case 4:
                             Console.Clear();
-                            catalogs.ShowInfo();
+                            for (int i = 0; i < arr.Length; i++)
+                            {
+                                Console.WriteLine(arr[i] + "\n + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - +");
+                            }
                             break;
                         case 5:
                             Console.Clear();
-                            catalogs.Sort();
-                            break;
-                        case 6:
-                            Console.Clear();
-                            Console.WriteLine("Выберите по каким критериям сортировать");
-                            catalogs.SortingByArguments(Menu("1 - Название\n2 - Дата создания\n3 - Кол-во файлов"));
-                            break;
-                        case 7:
-                            Catalog test1 = new Catalog("1", DateTime.Now, 423);
-                            Catalog test2 = new Catalog("2", DateTime.Now, 12);
-                            Catalog[] arr = { test1, test2};
-                            Array.Sort(arr);
-                            foreach (var obj in arr)
+                            Console.WriteLine("Выберите Дополнительный критерий сортировки");
+                            switch (Menu("1 - Название\n2 - Кол-во файлов"))
                             {
-                                obj.ShowInfo();
+                                case 1:
+                                    Console.Clear();
+                                    Array.Sort(arr, new Catalog());
+                                    break;
+                                case 2:
+                                    Console.Clear();
+                                    Array.Sort(arr);
+                                    break;
                             }
-                            Thread.Sleep(20000);
                             break;
                         default:
                             Console.Clear();
                             break;
                     }
                 }
-                //catch
-                //{
-                //    Console.Clear();
-                //}
+                catch
+                {
+                    Console.Clear();
+                }
             }
         }
     }
+}
 

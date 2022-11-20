@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Kpyap_11
 {
 
-    class Catalog : ICloneable, IComparable, IWork
+    class Catalog : ICloneable, IComparable,IWork , IComparer<Catalog>
     {
 
         private string name;
@@ -82,9 +82,23 @@ namespace Kpyap_11
         }
         public int CompareTo(object obj)
         {
-            Catalog C = (Catalog)obj;
-            return Math.Sign(this.CountOfFiles - C.CountOfFiles);
+            Catalog temp = (Catalog)obj;
+            return Math.Sign(this.CountOfFiles - temp.CountOfFiles);
+        }
+        public int Compare(Catalog? p1, Catalog? p2)
+        {
+            return p1.Name.Length - p2.Name.Length;
         }
 
+        public Catalog[] RandomCatalogs()
+        {
+            Catalog[] catalogs = new Catalog[5];
+            Catalog temp = new Catalog();
+            for (int i = 0; i < catalogs.Length; i++)
+            {
+                catalogs[i] = (Catalog)temp.Create();
+            }
+            return catalogs;
+        }
     }
 }
