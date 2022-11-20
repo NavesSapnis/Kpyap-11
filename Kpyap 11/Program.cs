@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Kpyap_11
 {
     class Program
     {
-        
+
         public static int Menu(string text)
         {
             Console.WriteLine(text);
@@ -13,11 +19,85 @@ namespace Kpyap_11
         }
         static void Main(string[] args)
         {
+            Catalog catalog = new Catalog();
+
+            Catalogs catalogs = new Catalogs();
             while (true)
             {
-                S
+                //try
+                //{
+                    switch (Menu("1 - Создать объект\n2 - клонировать объект\n3 - Создать массив объктов\n4 - вывести массив\n5 - Отсортировать по названию файла\n6 - Отсортировать по выбранному полю\n7 говно переделвый"))
+                    {
+                        case 1:
+                            Console.Clear();
+                            switch (Menu("1 - определить явно\n2 - рандомно"))
+                            {
+                                case 1:
+                                    Console.Clear();
+                                    Console.WriteLine("Введите название");
+                                    string name = Console.ReadLine();
+                                    Console.WriteLine("Введите дату создания");
+                                    DateTime date = Convert.ToDateTime(Console.ReadLine());
+                                    Console.WriteLine("Введите число файлов");
+                                    int count = Convert.ToInt32(Console.ReadLine());
+                                    catalog = new Catalog(name, date, count);
+                                    break;
+                                case 2:
+                                    Console.Clear();
+                                    catalog = (Catalog)catalog.Create();
+                                    break;
+                                default:
+                                    Console.Clear();
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            Console.Clear();
+                            Catalog fakeCatalog = (Catalog)catalog.Clone();
+                            Console.WriteLine("Оригинальный объект");
+                            catalog.ShowInfo();
+                            Console.WriteLine("\nКлон объекта");
+                            fakeCatalog.ShowInfo();
+
+                            break;
+                        case 3:
+                            Console.Clear();
+                            catalogs = (Catalogs)catalogs.CreateArray();
+                            break;
+                        case 4:
+                            Console.Clear();
+                            catalogs.ShowInfo();
+                            break;
+                        case 5:
+                            Console.Clear();
+                            catalogs.Sort();
+                            break;
+                        case 6:
+                            Console.Clear();
+                            Console.WriteLine("Выберите по каким критериям сортировать");
+                            catalogs.SortingByArguments(Menu("1 - Название\n2 - Дата создания\n3 - Кол-во файлов"));
+                            break;
+                        case 7:
+                            Catalog test1 = new Catalog("1", DateTime.Now, 423);
+                            Catalog test2 = new Catalog("2", DateTime.Now, 12);
+                            Catalog[] arr = { test1, test2};
+                            Array.Sort(arr);
+                            foreach (var obj in arr)
+                            {
+                                obj.ShowInfo();
+                            }
+                            Thread.Sleep(20000);
+                            break;
+                        default:
+                            Console.Clear();
+                            break;
+                    }
+                }
+                //catch
+                //{
+                //    Console.Clear();
+                //}
             }
-            
         }
     }
-}
+

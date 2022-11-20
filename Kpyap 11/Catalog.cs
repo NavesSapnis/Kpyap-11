@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Kpyap_11
 {
-    
-    class Catalog
+
+    class Catalog : ICloneable, IComparable, IWork
     {
-        
+
         private string name;
         private DateTime timeOfStart;
         private int countOfFiles;
@@ -15,12 +18,12 @@ namespace Kpyap_11
         public string Name
         {
             get { return name; }
-            set {  name = value; }
+            set { name = value; }
         }
         public DateTime TimeOfStart
         {
             get { return timeOfStart; }
-            set 
+            set
             {
                 DateTime maxDate = DateTime.Now;
                 if (value > maxDate)
@@ -31,13 +34,13 @@ namespace Kpyap_11
                 {
                     timeOfStart = value;
                 }
-                
+
             }
         }
         public int CountOfFiles
         {
             get { return countOfFiles; }
-            set 
+            set
             {
                 if (value < 0)
                 {
@@ -47,8 +50,41 @@ namespace Kpyap_11
                 {
                     countOfFiles = value;
                 }
-                
+
             }
         }
+        public Catalog(string name, DateTime timeOfStart, int countOfFiles)
+        {
+            Name = name;
+            TimeOfStart = timeOfStart;
+            CountOfFiles = countOfFiles;
+        }
+        public Catalog() { }
+        public object Create()
+        {
+            Random random = new Random();
+            string[] fileName = { "ahk", "sqlPack", "Remix", "csgo500", "lr3", "sandbox", "bin", "vzlom", "Питонист хуже пидораса"};
+            DateTime randomDate = new DateTime(random.Next(2000,2023), random.Next(1, 13), random.Next(1, 31), 0, 0, 0);
+            Catalog catalog = new Catalog(fileName[random.Next(0,9)], randomDate, random.Next(1, 100));
+            return catalog;
+        }
+        public void ShowInfo()
+        {
+            Console.WriteLine($"Название = { Name}\nДата создания = {TimeOfStart}\nКол-во файлов = {CountOfFiles}");
+        }
+        public object Clone()
+        {
+            return new Catalog(Name, TimeOfStart, CountOfFiles);
+        }
+        public override string ToString()
+        {
+            return $"Название = { Name}\nДата создания = {TimeOfStart}\nКол-во файлов = {CountOfFiles}";
+        }
+        public int CompareTo(object obj)
+        {
+            Catalog C = (Catalog)obj;
+            return Math.Sign(this.CountOfFiles - C.CountOfFiles);
+        }
+
     }
 }
