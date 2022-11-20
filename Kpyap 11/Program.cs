@@ -20,8 +20,6 @@ namespace Kpyap_11
         static void Main(string[] args)
         {
             Catalog catalog = new Catalog();
-            Catalog test1 = new Catalog("1", DateTime.Now, 423);
-            Catalog test2 = new Catalog("2", DateTime.Now, 12);
             Catalog[] arr = new Catalog[5];
             while (true)
             {
