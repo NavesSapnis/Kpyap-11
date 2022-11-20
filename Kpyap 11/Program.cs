@@ -18,7 +18,7 @@ namespace Kpyap_11
             return coise;
         }
         static void Main(string[] args)
-        {
+        {//
             Catalog catalog = new Catalog();
             Catalog[] arr = new Catalog[5];
             while (true)
